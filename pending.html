@@ -94,7 +94,7 @@
             <td>${product.details.length}</td>
             <td>${product.address}</td>
             <td>${product.totalPrice}</td>
-            <td><button onclick="confirmOrder('${product._id}')"style="color:black" class="btn btn-danger">Confirm</button ><button style="color:black" class="btn btn-danger">Delete</button></td>
+            <td><button onclick="confirmOrder('${product._id}')"style="color:black" class="btn btn-danger">Confirm</button></td>
             `;
             parentDiv.appendChild(tr);
         }
@@ -120,6 +120,8 @@
             alert(res.msg);
             location.reload();
         }
+
+        
     </script>
 </body>
 </html>
