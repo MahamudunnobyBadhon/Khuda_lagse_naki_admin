@@ -53,7 +53,10 @@
               <tr>
                 <th scope="col">Image</th>
                 <th scope="col">Name</th>
-                <th scope="col">Price</th>
+                <th scope="col">Old Price</th>
+                <th scope="col">New Price</th>
+                <th scope="col">Old Quantity</th>
+                <th scope="col">New Quantity</th>
                 <th scope="col">Update</th>
                 
               </tr>
@@ -69,7 +72,6 @@
         const loadProducts = async() => {
         let resoponse2 = await fetch("https://calm-garden-13016.herokuapp.com/allfoods");
         let res2 = await resoponse2.json();
-        console.log(res2);
         showProducts(res2);
         return res2;
         };
@@ -83,16 +85,24 @@
         const allProducts= products.map((pd) => pd);
         for(const product of allProducts) {
 
-            console.log(product);
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td><img style="width:100px ; height: 100px"src="${product.imgSource}"</img></td>
             <td>${product.name}</td>
             <td>${product.price}</td>
-            <td> <button>Update</button></td>
+            <td><input id="input-price-${product._id}"></input></td>
+            <td>${product.quantity}</td>
+            <td><input id="input-quantity-${product._id}"></input></td>
+            <td> <button onclick="updateFood('${product._id}')">Update</button></td>
             `;
             parentDiv.appendChild(tr);
         }
+        }
+
+        const updateFood = (productId) =>{
+           console.log(productId);
+           console.log(document.getElementById(`input-price-${productId}`).value);
+           console.log(document.getElementById(`input-quantity-${productId}`).value);
         }
     </script>
 </body>
