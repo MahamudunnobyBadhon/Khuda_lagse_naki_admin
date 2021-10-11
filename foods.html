@@ -88,21 +88,46 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td><img style="width:100px ; height: 100px"src="${product.imgSource}"</img></td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
+            <td class="fw-bold">${product.name}</td>
+            <td class="text-danger  fw-bold">${product.price}</td>
             <td><input id="input-price-${product._id}"></input></td>
-            <td>${product.quantity}</td>
+            <td class="text-danger  fw-bold">${product.quantity}</td>
             <td><input id="input-quantity-${product._id}"></input></td>
-            <td> <button onclick="updateFood('${product._id}')">Update</button></td>
+            <td> <button style="background-color: blue; color: white"onclick="updateFood('${product._id}')">Update</button></td>
             `;
             parentDiv.appendChild(tr);
         }
         }
 
-        const updateFood = (productId) =>{
+        const updateFood = async(productId) =>{
            console.log(productId);
-           console.log(document.getElementById(`input-price-${productId}`).value);
-           console.log(document.getElementById(`input-quantity-${productId}`).value);
+           const price = document.getElementById(`input-price-${productId}`).value;
+           const quantity = document.getElementById(`input-quantity-${productId}`).value;
+
+           console.log(price, quantity);
+           console.log(typeof(document.getElementById(`input-quantity-${productId}`).value));
+
+           if(price != "" && quantity != ""){
+            const params = {
+              id: productId,
+              price,
+              quantity
+            }
+
+            var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+
+
+            let response = await fetch('https://calm-garden-13016.herokuapp.com/admin/food/update', {
+                method: 'PUT',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
+                body: queryString,
+            });
+
+            let res = await response.json();
+            console.log(res);
+          }else{
+            alert("Please, enter some value in update field then click update button...");
+          }
         }
     </script>
 </body>
