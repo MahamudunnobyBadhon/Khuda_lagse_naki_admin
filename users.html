@@ -38,6 +38,8 @@
         <li><a href="users.html">Users</a></li>
         <li><a href="orders.html">Confirm Orders</a></li>   
         <li><a href="pending.html">Pending Orders</a></li> 
+        <li><a href="cupons.html">Cupons</a></li>
+        <li><a href="newCupon.html">New Cupon</a></li>
       </ul>
       <label id="icon">
         <i class="fas fa-bars"></i>
@@ -88,11 +90,33 @@
             <td>${product.name}</td>
             <td>${product.email}</td>
             <td>${product.mobile}</td>
-            <td><button>Remove</button></td>
+            <td><button onclick="deleteUser('${product._id}')">Remove</button></td>
             `;
             parentDiv.appendChild(tr);
         }
         }
+
+        const deleteUser = async (id) =>{
+          const params = {
+                    id : id,
+                  }
+                  var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+
+
+          let response = await fetch('https://calm-garden-13016.herokuapp.com/delete_user', {
+            method: 'DELETE',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
+            body: queryString,
+
+              });
+
+            let res = await response.json();
+            console.log(res);
+            console.log(id,'clicked');
+            alert(res.msg);
+            location.reload();
+        }
+
     </script>
 </body>
 </html>

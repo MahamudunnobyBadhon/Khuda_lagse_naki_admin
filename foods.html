@@ -38,6 +38,8 @@
         <li><a href="users.html">Users</a></li>
         <li><a href="orders.html">Confirm Orders</a></li>   
         <li><a href="pending.html">Pending Orders</a></li>
+        <li><a href="cupons.html">Cupons</a></li>
+            <li><a href="newCupon.html">New Cupon</a></li>
       </ul>
       <label id="icon">
         <i class="fas fa-bars"></i>
@@ -90,9 +92,9 @@
             <td><img style="width:100px ; height: 100px"src="${product.imgSource}"</img></td>
             <td class="fw-bold">${product.name}</td>
             <td class="text-danger  fw-bold">${product.price}</td>
-            <td><input id="input-price-${product._id}"></input></td>
+            <td><input type="number" id="input-price-${product._id}"></input></td>
             <td class="text-danger  fw-bold">${product.quantity}</td>
-            <td><input id="input-quantity-${product._id}"></input></td>
+            <td><input  type="number" id="input-quantity-${product._id}"></input></td>
             <td> <button style="background-color: blue; color: white"onclick="updateFood('${product._id}')">Update</button></td>
             `;
             parentDiv.appendChild(tr);
